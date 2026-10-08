@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Your result - Bridgeway AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <a href="/" class="text-decoration-none"><i class="bi bi-arrow-left"></i> New search</a>
+    <h2 class="fw-bold mt-2 mb-4">Your path to {{ job_role.title() }}</h2>
+
+    <!-- Summary row -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card soft-card h-100 text-center p-4">
+                <div class="score-ring" style="--p: {{ match_percent }}">
+                    <span>{{ match_percent }}%</span>
+                </div>
+                <h6 class="mt-3 mb-0 fw-semibold">Skill match</h6>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card soft-card h-100 p-4">
+                <h6 class="fw-bold"><i class="bi bi-check-circle-fill text-success"></i> Skills you already have</h6>
+                <div class="mt-2">
+                    {% for skill in have %}
+                        <span class="skill-have">{{ skill.name.title() }}</span>
+                    {% else %}
+                        <span class="text-muted">None yet. Everyone starts somewhere!</span>
+                    {% endfor %}
+                </div>
+
+                <hr>
+                <div class="row text-center">
+                    <div class="col-4">
+                        <div class="fs-3 fw-bold text-primary">{{ gaps|length }}</div>
+                        <div class="small text-muted">Skills to learn</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="fs-3 fw-bold text-primary">{{ total_hours }}</div>
+                        <div class="small text-muted">Total hours</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="fs-3 fw-bold text-primary">{{ total_weeks }}</div>
+                        <div class="small text-muted">Weeks at {{ hours_per_week }} h/week</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if gaps %}
+    <!-- Missing skills -->
+    <h4 class="fw-bold mt-5 mb-3"><i class="bi bi-exclamation-circle text-warning"></i> Skills you need to learn</h4>
+    <div class="row g-4">
+        {% for skill in gaps %}
+        <div class="col-lg-6">
+            <div class="card soft-card h-100 p-4">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <span class="gap-number">{{ loop.index }}</span>
+                    <div>
+                        <h5 class="mb-0 fw-bold">{{ skill.name.title() }}</h5>
+                        <span class="badge text-bg-light"><i class="bi bi-clock"></i> about {{ skill.hours }} hours</span>
+                    </div>
+                </div>
+
+                <p class="fw-semibold mb-1">Important topics</p>
+                <ul class="list-unstyled mb-3">
+                    {% for topic in skill.topics.split("|") %}
+                        <li><i class="bi bi-check2 text-primary"></i> {{ topic }}</li>
+                    {% endfor %}
+                </ul>
+
+                <p class="fw-semibold mb-1">How to learn</p>
+                <p class="text-muted">{{ skill.how_to_learn }}</p>
+
+                <a href="{{ skill.resource_url }}" target="_blank" class="btn btn-outline-primary btn-sm mt-auto align-self-start">
+                    <i class="bi bi-box-arrow-up-right"></i> {{ skill.resource_name }}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Roadmap -->
+    <h4 class="fw-bold mt-5 mb-4"><i class="bi bi-map text-primary"></i> Your learning roadmap</h4>
+    <div class="timeline">
+        {% for step in roadmap %}
+        <div class="timeline-item">
+            <div class="timeline-dot">{{ step.number }}</div>
+            <div class="card soft-card p-3">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <h6 class="fw-bold mb-1">{{ step.name.title() }}</h6>
+                    <span class="badge bg-primary align-self-start">
+                        {% if step.start_week == step.end_week %}
+                            Week {{ step.start_week }}
+                        {% else %}
+                            Week {{ step.start_week }} to {{ step.end_week }}
+                        {% endif %}
+                    </span>
+                </div>
+                <small class="text-muted">{{ step.hours }} hours of study</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="alert alert-success mt-4">
+        <i class="bi bi-trophy"></i> You have every skill for this role. You are ready to apply!
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

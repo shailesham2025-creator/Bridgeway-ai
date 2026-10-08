@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Error - Bridgeway AI{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="display-1 fw-bold text-primary">{{ code }}</div>
+    <h4 class="mb-4">{{ message }}</h4>
+    <a href="/" class="btn btn-brand px-4">Back to home</a>
+</div>
+{% endblock %}

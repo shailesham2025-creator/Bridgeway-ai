@@ -1,0 +1,161 @@
+:root {
+    --brand: #4f46e5;
+    --brand-dark: #3730a3;
+    --soft: #eef2ff;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 70px 0 110px;
+}
+.hero p { opacity: 0.9; }
+
+.form-card {
+    margin-top: -70px;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+.btn-brand {
+    background: var(--brand);
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+}
+.btn-brand:hover { background: var(--brand-dark); color: white; }
+
+/* ---------- Skill tag input ---------- */
+.tag-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 48px;
+    cursor: text;
+}
+.tag-box input {
+    border: 0;
+    outline: 0;
+    flex: 1;
+    min-width: 140px;
+    background: transparent;
+}
+.tag {
+    background: var(--soft);
+    color: var(--brand-dark);
+    border-radius: 20px;
+    padding: 3px 6px 3px 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.tag button {
+    border: 0;
+    background: transparent;
+    color: var(--brand-dark);
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 6px;
+}
+
+/* ---------- Feature boxes ---------- */
+.feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--soft);
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 12px;
+}
+
+/* ---------- Result: score ring ---------- */
+.score-ring {
+    --p: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(var(--brand) calc(var(--p) * 1%), #e2e8f0 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.score-ring span {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.soft-card {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+}
+
+.skill-have {
+    background: #dcfce7;
+    color: #166534;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 6px 8px 0;
+}
+
+.gap-number {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: white;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ---------- Roadmap timeline ---------- */
+.timeline {
+    border-left: 3px solid #c7d2fe;
+    margin-left: 16px;
+    padding-left: 30px;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 22px;
+}
+.timeline-dot {
+    position: absolute;
+    left: -49px;
+    top: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #f8fafc;
+}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Bridgeway AI - Find your skill gaps{% endblock %}
+
+{% block content %}
+<section class="hero text-center">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Bridge the gap to your dream job</h1>
+        <p class="lead mb-0">Tell us the role you want and the skills you have. We'll show what's missing and how to learn it.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card form-card">
+                <div class="card-body p-4 p-md-5">
+
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+
+                    <form action="/result" method="POST" id="skillForm">
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-briefcase"></i> Target job role
+                            </label>
+                            <select name="job_role" class="form-select form-select-lg">
+                                {% for role in roles %}
+                                    <option value="{{ role }}">{{ role.title() }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-lightning-charge"></i> Skills you already know
+                            </label>
+                            <div class="tag-box form-control" id="tagBox">
+                                <input type="text" id="tagInput" placeholder="Type a skill and press Enter">
+                            </div>
+                            <input type="hidden" name="skills" id="skillsHidden">
+                            <div class="form-text">Example: python, sql. Leave empty if you are just starting.</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-clock"></i> Study time per week
+                            </label>
+                            <select name="hours_per_week" class="form-select">
+                                <option value="5">5 hours</option>
+                                <option value="10" selected>10 hours</option>
+                                <option value="15">15 hours</option>
+                                <option value="20">20 hours</option>
+                                <option value="30">30 hours</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-brand w-100 btn-lg">
+                            Find my skill gaps <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center mt-5 g-4">
+        <div class="col-md-4">
+            <div class="feature-icon"><i class="bi bi-search"></i></div>
+            <h6 class="fw-bold">1. Find gaps</h6>
+            <p class="text-muted small">See exactly which skills you are missing for the role.</p>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-icon"><i class="bi bi-journal-check"></i></div>
+            <h6 class="fw-bold">2. Learn smart</h6>
+            <p class="text-muted small">Get key topics, learning tips and free resources.</p>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-icon"><i class="bi bi-map"></i></div>
+            <h6 class="fw-bold">3. Follow the roadmap</h6>
+            <p class="text-muted small">A week-by-week plan based on your study time.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
